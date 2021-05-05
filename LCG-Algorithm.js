@@ -47,4 +47,4 @@ do{
 
 
 
-console.log(aux);
+//document.write(aux);
