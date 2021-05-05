@@ -16,35 +16,41 @@ function RandomSeed(){
     return seed;
 }
 
-let firstSeedLCG = LinearCongruentialGenerator(RandomSeed());
-let aux = [];
-let lastSeed;
-let time = new Date;
-let contador = 0;
+var randomNumbersLcg = document.getElementById("p2");
+var dataLcg = document.getElementById("data2");
 
+randomNumbersLcg.innerHTML = "0 0 0 0 0 0";
 
-aux.push(firstSeedLCG);
-lastSeed = aux[aux.length - 1];
+window.addEventListener("click", function(e){
 
-do{
-    let newSeed = LinearCongruentialGenerator(lastSeed);
+    let firstSeedLCG = LinearCongruentialGenerator(RandomSeed());
+    let aux = [];
+    let lastSeed;
+    let time = new Date;
+    let contador = 0;
+
+    aux.push(firstSeedLCG);
+    lastSeed = aux[aux.length - 1];
+
+    do{
+        let newSeed = LinearCongruentialGenerator(lastSeed);
+        
     
+        if(newSeed == 0){
+            lastSeed = newSeed;
+            newSeed = LinearCongruentialGenerator(lastSeed);
+            aux.push(LinearCongruentialGenerator(lastSeed));
+            lastSeed = aux[aux.length - 1];
+            contador++;
+        }else{
+            aux.push(LinearCongruentialGenerator(lastSeed));
+            lastSeed = aux[aux.length - 1];
+            contador++;
+        }
+    
+    }while(contador < 5);
 
-    if(newSeed == 0){
-        lastSeed = newSeed;
-        newSeed = LinearCongruentialGenerator(lastSeed);
-        aux.push(LinearCongruentialGenerator(lastSeed));
-        lastSeed = aux[aux.length - 1];
-        contador++;
-    }else{
-        aux.push(LinearCongruentialGenerator(lastSeed));
-        lastSeed = aux[aux.length - 1];
-        contador++;
-    }
+    randomNumbersLcg.innerHTML = aux.join(" ");
+    dataLcg.innerHTML = "Time: " + time.getMilliseconds() + "<br>" + "First Seed: " + firstSeedLCG;
+})
 
-}while(contador < 5);
-
-
-
-
-//document.write(aux);

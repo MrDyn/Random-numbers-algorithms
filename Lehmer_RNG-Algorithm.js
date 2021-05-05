@@ -1,11 +1,13 @@
-var randomizeSeed = document.getElementById("main");
-//var randomizeSeed = document.getElementById("body");
+var randomNumbersLehmer = document.getElementById("p1");
+var dataLehmer = document.getElementById("data1");
 const randomNumbersVector = [0, 0, 0, 0, 0, 0];
 
-randomizeSeed.innerHTML = randomNumbersVector;
+    
+
+randomNumbersLehmer.innerHTML = randomNumbersVector.join(" ");
 
 window.addEventListener("click", function(e){
-    randomizeSeed.innerHTML = randomNumbersVector;
+    randomNumbersLehmer.innerHTML = randomNumbersVector.join(" ");
 })
 
 window.addEventListener("mousemove", function(e){
@@ -28,18 +30,17 @@ window.addEventListener("mousemove", function(e){
         
     }
     
-    //randomizeSeed.innerHTML = randomNumbersVector;
+    //randomNumbersLehmer.innerHTML = randomNumbersVector;
 
-    /*
-    randomizeSeed.innerHTML = 
+    
+    dataLehmer.innerHTML = 
         "X: " + mouse.page.x +
         "<br>" + 
         "Y: " + mouse.page.y +
         "<br>" + 
-        "First Seed: " + firstSeed +
-        "<br>" +
-        "First Seed(Vector): " + LehmerAlgorithm(firstSeed)
-    */
+        "First Seed: " + firstSeed;
+
+    
 });
 
 
