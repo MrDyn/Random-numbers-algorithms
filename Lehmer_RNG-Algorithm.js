@@ -1,4 +1,12 @@
 var randomizeSeed = document.getElementById("main");
+//var randomizeSeed = document.getElementById("body");
+const randomNumbersVector = [0, 0, 0, 0, 0, 0];
+
+randomizeSeed.innerHTML = randomNumbersVector;
+
+window.addEventListener("click", function(e){
+    randomizeSeed.innerHTML = randomNumbersVector;
+})
 
 window.addEventListener("mousemove", function(e){
     var mouse = {
@@ -7,12 +15,35 @@ window.addEventListener("mousemove", function(e){
             y: e.pageY
         }
     };
+    let firstSeed =  SeedGeneration(mouse.page.x, mouse.page.y);
+    let newSeed;
+
+    if(PrimeNumber(firstSeed)){
+        newSeed = LehmerAlgorithm(firstSeed);
+        randomNumbersVector[0] = newSeed;
+        for(let i = 1; i <= 5; i++){
+            newSeed = LehmerAlgorithm(newSeed);
+            randomNumbersVector[i] = newSeed;
+        }
+        
+    }
+    
+    //randomizeSeed.innerHTML = randomNumbersVector;
+
+    /*
+    randomizeSeed.innerHTML = 
+        "X: " + mouse.page.x +
+        "<br>" + 
+        "Y: " + mouse.page.y +
+        "<br>" + 
+        "First Seed: " + firstSeed +
+        "<br>" +
+        "First Seed(Vector): " + LehmerAlgorithm(firstSeed)
+    */
+});
 
 
-    randomizeSeed.innerHTML =  "X: " + mouse.page.x + "<br>" + "Y: " + mouse.page.y;
-})
-
-function primeNumber(value){
+function PrimeNumber(value){
     if(value == 0 || value == 1){
         return value;
     }
@@ -25,7 +56,7 @@ function primeNumber(value){
     return value;
 }
 
-function coprimeNumber(a, b){
+function CoprimeNumber(a, b){
     if(primeNumber(a) && primeNumber(b)){
         return true;
     }
@@ -33,4 +64,15 @@ function coprimeNumber(a, b){
     return false;
 }
 
+function SeedGeneration(a, b){
+    if(a % b == 0){
+        return 1
+    }else{
+        return a % b;
+    }
+}
 
+function LehmerAlgorithm(seed){
+
+    return (3 * seed) % 61
+}

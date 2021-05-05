@@ -16,14 +16,14 @@ function RandomSeed(){
     return seed;
 }
 
-let firstSeed = LinearCongruentialGenerator(RandomSeed());
+let firstSeedLCG = LinearCongruentialGenerator(RandomSeed());
 let aux = [];
 let lastSeed;
 let time = new Date;
 let contador = 0;
 
 
-aux.push(firstSeed);
+aux.push(firstSeedLCG);
 lastSeed = aux[aux.length - 1];
 
 do{
